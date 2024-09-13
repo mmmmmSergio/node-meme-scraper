@@ -1,7 +1,7 @@
-import { mkdir, writeFile } from 'fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import fetch from 'node-fetch';
 import { parse } from 'node-html-parser';
-import { join } from 'path';
 
 const url = 'https://memegen-link-examples-upleveled.netlify.app';
 
@@ -40,4 +40,4 @@ const fetchImages = async () => {
   }
 };
 
-fetchImages();
+await fetchImages();
