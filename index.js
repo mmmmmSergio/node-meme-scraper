@@ -5,8 +5,8 @@ import { parse } from 'node-html-parser';
 
 const url = 'https://memegen-link-examples-upleveled.netlify.app';
 
-const downloadImage = async (url, filepath) => {
-  const response = await fetch(url);
+const downloadImage = async (imageUrl, filepath) => {
+  const response = await fetch(imageUrl);
   const arrayBuffer = await response.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
   await writeFile(filepath, buffer);
@@ -26,11 +26,11 @@ const fetchImages = async () => {
     await mkdir(memesDir, { recursive: true });
 
     await Promise.all(
-      imageUrls.map(async (url, index) => {
+      imageUrls.map(async (imageUrl, index) => {
         const filename = `${String(index + 1).padStart(2, '0')}.jpg`;
         const filepath = join(memesDir, filename);
-        console.log(`Downloading: ${url} -> ${filename}`);
-        await downloadImage(url, filepath);
+        console.log(`Downloading: ${imageUrl} -> ${filename}`);
+        await downloadImage(imageUrl, filepath);
       }),
     );
 
